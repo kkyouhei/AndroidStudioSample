@@ -23,8 +23,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// GAME FEAT
+import jp.basicinc.gamefeat.android.sdk.controller.GameFeatAppController;
+import jp.basicinc.gamefeat.android.sdk.view.GameFeatIconView;
+import jp.basicinc.gamefeat.android.sdk.view.GameFeatWallButtonView;
+import jp.basicinc.gamefeat.android.sdk.view.listener.GameFeatPopupListener;
 
 public class MainActivity extends ActionBarActivity{
+    final GameFeatAppController gfAppController = new GameFeatAppController();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,12 @@ public class MainActivity extends ActionBarActivity{
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        gfAppController.activateGF(MainActivity.this, false, true, true);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -48,7 +61,7 @@ public class MainActivity extends ActionBarActivity{
         final ArrayList <Map<String, String>>list = news.getNews();
         SimpleAdapter adapter = new SimpleAdapter(
                 this,
-                news.getNews(),
+                list,
                 android.R.layout.simple_expandable_list_item_2,
                 new String[]{"main", "sub"},
                 new int[]{android.R.id.text1, android.R.id.text2});
@@ -59,8 +72,15 @@ public class MainActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("debug", "click is content item");
-                Intent i = new Intent(getApplicationContext(), ContentActivity.class);
+
                 Map <String, String>news = list.get(position);
+
+                if(news.get("is_ad").equals("1")) {
+                    gfAppController.show(MainActivity.this);
+                    return;
+                }
+
+                Intent i = new Intent(getApplicationContext(), ContentActivity.class);
                 i.putExtra("title", news.get("main"));
                 i.putExtra("content", news.get("sub"));
                 startActivity(i);

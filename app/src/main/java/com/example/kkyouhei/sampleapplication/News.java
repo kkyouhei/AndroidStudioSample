@@ -13,14 +13,14 @@ public class News extends ArrayList<Map<String, String>> {
     private ArrayList<Map<String, String>> news = new ArrayList<Map<String, String>>();
 
     public News(){
-        String[] title = new String[]{
+        String[] titles = new String[]{
                 "タイトル1",
                 "タイトル2",
                 "タイトル3",
-                "タイトル4",
+                "広告です",
                 "タイトル5",
                 "タイトル6",
-                "タイトル7",
+                "広告です",
                 "タイトル8",
                 "タイトル9",
 
@@ -35,13 +35,13 @@ public class News extends ArrayList<Map<String, String>> {
                 "コンテンツ7",
                 "コンテンツ8",
                 "コンテンツ9",
-
         };
 
-        for(int i=0; i<title.length; i++){
+        for(int i=0; i<titles.length; i++){
             Map<String, String> map = new HashMap<String, String>();
-            map.put("main", title[i]);
+            map.put("main", titles[i]);
             map.put("sub", content[i]);
+            map.put("is_ad", (i%3 == 0) ? "1" : "0");
             news.add(map);
         }
     }
