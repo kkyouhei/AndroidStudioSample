@@ -1,9 +1,6 @@
-package com.example.kkyouhei.sampleapplication;
+package com.example.kkyouhei.SDK330_4_karino.controller;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,22 +9,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.HorizontalScrollView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
+
+import com.example.kkyouhei.SDK330_4_karino.R;
+import com.example.kkyouhei.SDK330_4_karino.model.AppModel;
+import com.example.kkyouhei.SDK330_4_karino.model.Model;
+import com.example.kkyouhei.SDK330_4_karino.model.News;
+import com.example.kkyouhei.SDK330_4_karino.model.Qiita;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 // GAME FEAT
 import jp.basicinc.gamefeat.android.sdk.controller.GameFeatAppController;
-import jp.basicinc.gamefeat.android.sdk.view.GameFeatIconView;
-import jp.basicinc.gamefeat.android.sdk.view.GameFeatWallButtonView;
-import jp.basicinc.gamefeat.android.sdk.view.listener.GameFeatPopupListener;
 
 public class MainActivity extends ActionBarActivity{
     final GameFeatAppController gfAppController = new GameFeatAppController();
@@ -44,6 +40,22 @@ public class MainActivity extends ActionBarActivity{
                 Log.d("debug", "header button is click");
             }
         });
+        Qiita qiita = new Qiita(new Model() {
+            public void onPreExecute() {
+                // do something
+            }
+            public void onProgressUpdate(int progress) {
+                // do something
+            }
+            public void onPostExecute(String result) {
+                // do something
+                Log.d("onPostExecute", result);
+            }
+            public void onCancelled() {
+                // do something
+            }
+        });
+        qiita.getPublicTimeline();
     }
 
     @Override
@@ -58,7 +70,7 @@ public class MainActivity extends ActionBarActivity{
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         News news = new News();
-        final ArrayList <Map<String, String>>list = news.getNews();
+        ArrayList <Map<String, String>>list = news.getNews();
         SimpleAdapter adapter = new SimpleAdapter(
                 this,
                 list,
@@ -66,23 +78,21 @@ public class MainActivity extends ActionBarActivity{
                 new String[]{"main", "sub"},
                 new int[]{android.R.id.text1, android.R.id.text2});
 
-        ListView listView = (ListView)findViewById(R.id.contents);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                ListView listView = (ListView)findViewById(R.id.contents);
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("debug", "click is content item");
 
-                Map <String, String>news = list.get(position);
-
-                if(news.get("is_ad").equals("1")) {
+                HashMap<String,String> value = (HashMap<String, String>)parent.getItemAtPosition(position);
+                if(value.get("is_ad").equals("1")) {
                     gfAppController.show(MainActivity.this);
                     return;
                 }
-
                 Intent i = new Intent(getApplicationContext(), ContentActivity.class);
-                i.putExtra("title", news.get("main"));
-                i.putExtra("content", news.get("sub"));
+                i.putExtra("title", value.get("main"));
+                i.putExtra("content", value.get("sub"));
                 startActivity(i);
             }
         });

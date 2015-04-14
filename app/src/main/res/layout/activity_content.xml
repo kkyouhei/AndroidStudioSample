@@ -4,9 +4,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.kkyouhei.sampleapplication.ContentActivity">
+    tools:context="com.example.kkyouhei.SDK330_4_karino.controller.ContentActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/helloworld"
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <!-- アイコン広告の読み込み -->
+    <include layout="@layout/linear_ads_icon" />
 </RelativeLayout>

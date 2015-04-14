@@ -1,9 +1,7 @@
-package com.example.kkyouhei.sampleapplication;
+package com.example.kkyouhei.SDK330_4_karino.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,7 +12,7 @@ public class News extends ArrayList<Map<String, String>> {
 
     public News(){
         String[] titles = new String[]{
-                "タイトル1",
+                "広告です",
                 "タイトル2",
                 "タイトル3",
                 "広告です",

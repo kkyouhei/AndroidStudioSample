@@ -1,4 +1,4 @@
-package com.example.kkyouhei.sampleapplication;
+package com.example.kkyouhei.SDK330_4_karino;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

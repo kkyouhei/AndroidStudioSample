@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.kkyouhei.sampleapplication"
+        applicationId "com.example.kkyouhei.SDK330_4_karino"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
@@ -25,4 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.google.android.gms:play-services:6.5.+'
     compile files('libs/GameFeatSDK.jar')
+    compile files('libs/GameFeatSDK331.jar')
+    compile files('libs/GameFeatSDK330.jar')
+    compile files('libs/GameFeatSDK320.jar')
 }

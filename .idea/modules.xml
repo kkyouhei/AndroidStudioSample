@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SampleApplication.iml" filepath="$PROJECT_DIR$/SampleApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioSample.iml" filepath="$PROJECT_DIR$/AndroidStudioSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SDK3.0_to_karino.iml" filepath="$PROJECT_DIR$/SDK3.0_to_karino.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
